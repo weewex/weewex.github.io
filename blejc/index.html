@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+
+    body{
+      margin: 0;
+      position: relative;
+      height: 100vh;
+    }
+
+    .bg, .bg-caliper, .overlay{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .bg{
+      background-image: url('blejc.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .bg-caliper{
+      --rotate: 0deg;
+      z-index: 2;
+      background-image: url('blejc.png');
+      background-size: cover;
+      background-position: center;
+      filter: hue-rotate(var(--rotate));
+    }
+
+    .overlay{
+      z-index: 3;
+    }
+
+    input{
+      width: 90%;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div id="caliper" class="bg-caliper"></div>
+  <div class="overlay">
+    <input id="range" type="range" min="0" max="360" ondrag="change()" onmousemove="change()">
+  </div>
+
+  <script>
+    function change(){
+      const value = document.getElementById("range").value
+      document.getElementById("caliper").style.setProperty('--rotate', value + 'deg');
+      console.log(value)
+    }
+
+  </script>
+
+</body>
+</html>
