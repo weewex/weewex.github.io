@@ -32,11 +32,13 @@
 
     .bg-caliper{
       --rotate: 0deg;
+      --brightness: 1;
+      --contrast: 1;
       z-index: 2;
       background-image: url('blejc.png');
       background-size: cover;
       background-position: center;
-      filter: hue-rotate(var(--rotate));
+      filter: hue-rotate(var(--rotate)) brightness(var(--brightness)) contrast(var(--contrast));
     }
 
     .overlay{
@@ -45,6 +47,7 @@
 
     input{
       width: 90%;
+      margin-top: 20px;
     }
 
   </style>
@@ -55,14 +58,26 @@
   <div class="bg"></div>
   <div id="caliper" class="bg-caliper"></div>
   <div class="overlay">
-    <input id="range" type="range" min="0" max="360" ondrag="change()" onmousemove="change()">
+    <input id="color" type="range" min="0" max="360" value="0" ondrag="change()" onmousemove="change()" onchange="change()">
+    <input id="brightness" type="range" min="0" max="5" value="1" step="0.1" ondrag="change()" onmousemove="change()" onchange="change()">
+    <input id="contrast" type="range" min="0" max="5" value="1" step="0.1" ondrag="change()" onmousemove="change()" onchange="change()">
   </div>
 
   <script>
+
+    window.onload = function (){
+      document.getElementById("color").addEventListener('touchmove', change)
+      document.getElementById("brightness").addEventListener('touchmove', change)
+      document.getElementById("contrast").addEventListener('touchmove', change)
+    }
+
     function change(){
-      const value = document.getElementById("range").value
-      document.getElementById("caliper").style.setProperty('--rotate', value + 'deg');
-      console.log(value)
+      const color = document.getElementById("color").value
+      const bright = document.getElementById("brightness").value
+      const contrast = document.getElementById("contrast").value
+      document.getElementById("caliper").style.setProperty('--rotate', color + 'deg');
+      document.getElementById("caliper").style.setProperty('--brightness', bright);
+      document.getElementById("caliper").style.setProperty('--contrast', contrast)
     }
 
   </script>
